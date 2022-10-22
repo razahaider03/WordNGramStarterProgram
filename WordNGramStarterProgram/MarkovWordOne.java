@@ -23,7 +23,25 @@ public class MarkovWordOne implements IMarkovModel {
     public void setTraining(String text){
 		myText = text.split("\\s+");
 	}
-	
+
+	private int indexOf(String[] words, String target, int start) {
+		for (int i = start; i < words.length; i++) {
+			if (words[i].equals(target)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public void testIndexOf() {
+		String test = "this is just a test yes this is a simple test";
+		setTraining(test);
+		int k = indexOf(myText, "simple", 5);
+		System.out.println(k);
+	}
+
+
+
 	public String getRandomText(int numWords){
 		StringBuilder sb = new StringBuilder();
 		int index = myRandom.nextInt(myText.length-1);  // random word to start with
@@ -32,9 +50,11 @@ public class MarkovWordOne implements IMarkovModel {
 		sb.append(" ");
 		for(int k=0; k < numWords-1; k++){
 		    ArrayList<String> follows = getFollows(key);
-		    if (follows.size() == 0) {
-		        break;
-		    }
+			if (follows.size() == 0) {
+				break;
+			}
+			System.out.println(key);
+			System.out.println(follows);
 			index = myRandom.nextInt(follows.size());
 			String next = follows.get(index);
 			sb.append(next);
@@ -47,7 +67,24 @@ public class MarkovWordOne implements IMarkovModel {
 	
 	private ArrayList<String> getFollows(String key) {
 	    ArrayList<String> follows = new ArrayList<String>();
+		int start = 0;
+		for (int i = 0; i < myText.length-1; i++) {
+			int index = indexOf(myText, key, start);
+			if (index == -1) {
+				break;
+			}
+			String next = myText[index + 1];
+			follows.add(next);
+			start= index+1;
+		}
+
 	    return follows;
     }
+
+
+//	public static void main(String[] args) {
+//		MarkovWordOne o1 = new MarkovWordOne();
+////		o1.testIndexOf();
+//	}
 
 }

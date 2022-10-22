@@ -9,8 +9,8 @@ package WordNGramStarterProgram;
 import edu.duke.*;
 
 public class MarkovRunner {
-    public void runModel(IMarkovModel markov, String text, int size){ 
-        markov.setTraining(text); 
+    public void runModel(IMarkovModel markov, String text, int size){
+        markov.setTraining(text);
         System.out.println("running with " + markov); 
         for(int k=0; k < 3; k++){ 
             String st = markov.getRandomText(size); 
@@ -18,7 +18,8 @@ public class MarkovRunner {
         } 
     } 
 
-    public void runModel(IMarkovModel markov, String text, int size, int seed){ 
+    public void runModel(IMarkovModel markov, String text, int size, int seed){
+
         markov.setTraining(text); 
         markov.setRandom(seed);
         System.out.println("running with " + markov); 
@@ -30,10 +31,11 @@ public class MarkovRunner {
 
     public void runMarkov() { 
         FileResource fr = new FileResource(); 
-        String st = fr.asString(); 
+        String st = fr.asString();
+        String st1 = "this is just a test yes this is a simple test";
         st = st.replace('\n', ' '); 
         MarkovWordOne markovWord = new MarkovWordOne(); 
-        runModel(markovWord, st, 200); 
+        runModel(markovWord, st1, 10);
     } 
 
     private void printOut(String s){
@@ -49,6 +51,11 @@ public class MarkovRunner {
             } 
         } 
         System.out.println("\n----------------------------------");
-    } 
+    }
+
+    public static void main(String[] args) {
+        MarkovRunner obj = new MarkovRunner();
+        obj.runMarkov();
+    }
 
 }
