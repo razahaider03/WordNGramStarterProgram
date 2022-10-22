@@ -53,8 +53,8 @@ public class MarkovWordOne implements IMarkovModel {
 			if (follows.size() == 0) {
 				break;
 			}
-			System.out.println(key);
-			System.out.println(follows);
+//			System.out.println(key);
+//			System.out.println(follows);
 			index = myRandom.nextInt(follows.size());
 			String next = follows.get(index);
 			sb.append(next);
@@ -70,7 +70,7 @@ public class MarkovWordOne implements IMarkovModel {
 		int start = 0;
 		for (int i = 0; i < myText.length-1; i++) {
 			int index = indexOf(myText, key, start);
-			if (index == -1) {
+			if (index == -1 || index >= myText.length-1) {
 				break;
 			}
 			String next = myText[index + 1];
