@@ -71,4 +71,9 @@ public class MarkovWordTwo implements IMarkovModel{
 
         return follows;
     }
+
+    @Override
+    public String toString() {
+        return "MarkovWordTwo";
+    }
 }
